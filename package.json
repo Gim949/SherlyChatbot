@@ -1,0 +1,19 @@
+{
+  "name": "sherly",
+  "version": "0.0.2",
+  "description": "A Discord bot named Sherly",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": ".git"
+  },
+  "author": "Ransackers",
+  "license": "MIT",
+  "dependencies": {
+    "cleverbot.io": "^1.0.4",
+    "discord.js": "^11.2.1"
+  }
+}
