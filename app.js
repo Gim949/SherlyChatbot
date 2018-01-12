@@ -6,6 +6,9 @@ const chatBot = require("./plugins/chatbot.js");
 
 const prefix = ["hey sherly ", "hi sherly ", "sherly "];
 
+//Used to control command cooldown
+const recentMsg = new Set();
+
 var canTalk = true,
     nextRndNum;
 
@@ -56,10 +59,10 @@ var chatResponse = {
     },
 
     '(fuck|fuk) (you|u|me)': message => {
-        message.channel.send("https://cdn.discordapp.com/attachments/397568125132079104/397639803501281292/gucci.gif");
+        message.channel.send("https://pbs.twimg.com/media/DTPxl0yVAAA_QmW.jpg"/*"https://cdn.discordapp.com/attachments/397568125132079104/397639803501281292/gucci.gif"*/);
     },
 
-    'u neet': message => {
+    'u.* neet': message => {
         message.channel.send("Hey, I went outside once.... sometimes...");
     },
 
@@ -148,9 +151,16 @@ client.on("message", message => {
         return;
     else if(message.author.bot)
         return;
+    else if(recentMsg.has(message.author.id)) //Checks user to see if he already executed a command/message
+        return;
     else{
         //Splits the our message into two parts, removing the 'sherly' bit and return an array thats either ["", <message>] or ["hey/hi", <message>]
         const content = message.content.toLowerCase().split("sherly ")[1];
+
+        if(content.length > 700){
+            message.channel.send("...Yea, too lazy to read that :3");
+            return;
+        }
 
         let isResponseFailed = true;
         for(let obj in chatResponse) {
@@ -175,6 +185,13 @@ client.on("message", message => {
             console.log("Sending ", content, " to cleverbot");
             chatBot.askBot(message, content);
         }
+
+        //Adds user to the set so they can't talk for 3 seconds
+        recentMsg.add(message.author.id);
+        setTimeout(() => {
+            //After 3 seconds, user is removed from set
+            recentMsg.delete(message.author.id);
+        }, 3000);
     }
 });
 
