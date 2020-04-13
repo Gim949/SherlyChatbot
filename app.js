@@ -26,7 +26,7 @@ var chatResponse = {
 
     'love.*(you|u|ya|\\bme)': message => {
         let arr1 = ["kule", "I mean, I like you as a friend :3", "Nice dood", "No you don't...", "Thanks for letting me know :p", "I ain't a trap", "NANII?!?", ":weary: :ok_hand:"];
-        let arr2 = ["Luv u too senpai :blush:", "Aww, ur too much :3", "Staaahhppp :blush:", "Oh baby, penetrate me with your floppy drive", "\:heart\:"];
+        let arr2 = ["Luv u too senpai :blush:", "Aww, ur too much :3", "Staaahhppp :blush:", "\:heart\:"];
         if(message.author.id == 200042113814102016)
             message.channel.send(arr2[Math.floor(Math.random() * arr2.length)]);
         else
@@ -177,11 +177,6 @@ client.on("message", message => {
         }
 
         if(canTalk && isResponseFailed){
-            // let arr = ["Why don't u just FUCK ME", "uhhh....\nSENPAAAIIIII HEEELP",
-            // "Sorry, the number you have dialed ended being a thot's number", "Steven is pretty kule i guess",
-            // "OI, shit uhhh\nhol up", "....I\'m soo sorry", "Sorry, Ransackers is soo dumb, he hasn't taught me how to respond to that ¯\\_(ツ)_/¯"];
-            // message.channel.send(arr[Math.floor(Math.random() * arr.length)]);
-            // console.log("[HELP] Couldn\'t respond to: " + content);
             console.log("Sending ", content, " to cleverbot");
             chatBot.askBot(message, content);
         }
